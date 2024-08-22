@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="assets/img/logoo.png" type="image/x-icon">
+    <script defer src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+    <link rel="stylesheet" href="assets/style/output.css">
+    <link rel="stylesheet" href="assets/style/outputNavBar.css">
+    <script defer src="assets/scripts/darkMode.js"></script>
+    <script defer src="assets/scripts/navBar.js"></script>
+    <script defer src="assets/scripts/videoSection.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">    <title>YouTube - neumorphism design</title>
+    <style>  
+        body {  
+            font-family: 'Nunito', sans-serif;  
+        }  
+        h1 {  
+            font-weight: 600;  
+        }  
+        p {  
+            font-weight: 400;  
+        }  
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div id="topBarNav" class="h-20 fixed top-0 w-full z-50">
+            <ul class="w-full h-full flex justify-between items-center px-5">
+                <li class="flex">
+                    <ul>
+                        <li class="shadowDes cursor-pointer rounded-lg" id="sideBarNavToggler">
+                            <input type="checkbox" onclick="navb()" style="display: none;" id="sideBarToggler">
+                            <label for="sideBarToggler" class=" cursor-pointer">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                                </svg>
+                            </label>
+                        </li>
+                    </ul>
+                </li>
+                <li class="md:w-80 hidden lg:flex">
+                    <input type="text" id="navSearch">
+                    <button id="btnSearch" class="h-7 w-7 shadowDes rounded-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 m-auto">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                        </svg>                          
+                    </button>
+                </li>
+                <li class="flex lg:hidden h-full">
+                    <div class="h-full rounded-2xl p-1 shadow-md">
+                        <img src="assets/img/fav_prev_ui.png" class="h-full" alt="">
+                    </div>
+                </li>
+                <li class="flex shadowDes rounded-full p-1" id="userIcon">
+                    <input type="checkbox" onclick="userMenu()" name="" style="display: none;" id="userIconDropDownMenu">
+                    <label for="userIconDropDownMenu" class="cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                        </svg>
+                    </label>
+                    <div id="mainMenuContainer" class="absolute top-16 right-6 w-36 rounded-md overflow-hidden z-50 cursor-auto">
+                        <ul class="flex flex-col gap-2 p-2 w-full">
+                            <li class="" id="quickControl">
+                                <ul class="flex items-center justify-between">
+                                    <li>
+                                        <button class="p-1 rounded-full z-40 flex items-center content-center shadowDes" onclick="toggleTheme()">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+                                            </svg>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button class="p-1 rounded-full z-40 flex items-center content-center shadowDes">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+                                            </svg>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button class="p-1 rounded-full z-40 flex items-center content-center shadowDes">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12.75 3.03v.568c0 .334.148.65.405.864l1.068.89c.442.369.535 1.01.216 1.49l-.51.766a2.25 2.25 0 0 1-1.161.886l-.143.048a1.107 1.107 0 0 0-.57 1.664c.369.555.169 1.307-.427 1.605L9 13.125l.423 1.059a.956.956 0 0 1-1.652.928l-.679-.906a1.125 1.125 0 0 0-1.906.172L4.5 15.75l-.612.153M12.75 3.031a9 9 0 0 0-8.862 12.872M12.75 3.031a9 9 0 0 1 6.69 14.036m0 0-.177-.529A2.25 2.25 0 0 0 17.128 15H16.5l-.324-.324a1.453 1.453 0 0 0-2.328.377l-.036.073a1.586 1.586 0 0 1-.982.816l-.99.282c-.55.157-.894.702-.8 1.267l.073.438c.08.474.49.821.97.821.846 0 1.598.542 1.865 1.345l.215.643m5.276-3.67a9.012 9.012 0 0 1-5.276 3.67m0 0a9 9 0 0 1-10.275-4.835M15.75 9c0 .896-.393 1.7-1.016 2.25" />
+                                            </svg>                                      
+                                        </button>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="shadowDes">
+                                <a href="#" class="">
+                                    option
+                                </a>
+                            </li>
+                            <li class="shadowDes">
+                                <a href="#" class="">
+                                    option
+                                </a>
+                            </li>
+                            <li class="shadowDes">
+                                <a href="#" class="">
+                                    option
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+ 
+    <div id="screenShelter" class="bg-transparent fixed top-20 h-full w-full z-40" onclick="clearAll()">
+    
+    </div>
+    
+    <div id="sideBarContainer" class="h-full fixed left-0 top-0 z-40 overflow-hidden py-20 pt lg:pb-0">
+
+        <div id="sideBarContent" class="w-full h-full p-2">
+            <ul>
+                <li><a href="#">Option</a></li>
+                <li><a href="#">Option</a></li>
+                <li><a href="#">Option</a></li>
+                <li><a href="#">Option</a></li>
+                <li><a href="#">Option</a></li>
+                <li><a href="#">Option</a></li>
+                <li><a href="#">Option</a></li>
+                <li><a href="#">Option</a></li>
+                <li><a href="#">Option</a></li>
+            </ul>
+        </div>
+        
+    </div>
+
+
+
+    <nav class="overflow-hidden lg:hidden">
+        <div id="bottomBarNav" class="h-20 fixed bottom-0 w-full z-50">
+            <ul class="flex justify-around items-center w-full h-full">
+                <li class="shadowDes rounded-lg p-2">
+                    <a href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                        </svg>
+                    </a>
+                </li>
+                <li class="shadowDes rounded-lg p-2">
+                    <a href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25Z" />
+                        </svg>
+                    </a>
+                </li>
+                <li class="shadowDes rounded-lg p-2">
+                    <a href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
+                    </a>
+                </li>
+                <li class="shadowDes rounded-lg p-2">
+                    <a href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 10.5v6m3-3H9m4.06-7.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
+                        </svg>
+                    </a>
+                </li>
+                <li class="shadowDes rounded-lg p-2">
+                    <a href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div id="screen" class="w-full h-full pb-20 lg:mb-0">
+            
+        <div id="mainPageVideoContainer">
+            <div class="videoCard" onclick="playVideo()">
+
+                <div class="cardImg">
+
+                    <img src="assets/img/Designer (1).png" alt="">
+
+                    <div class="save">
+
+                        <label class="ui-bookmark">
+                            <input type="checkbox">
+                            <div class="bookmark">
+                            <svg viewBox="0 0 32 32">
+                                <g>
+                                <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
+                                </g>
+                            </svg>
+                            </div>
+                        </label>
+                                                               
+                    </div>
+                    
+                </div>
+                <div class="cardDetails">
+                    <h1>Video title</h1>
+                    <span>2024/05/07</span>
+                    <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. A laudantium.
+                    </p>
+                </div>
+
+            </div>
+            <div class="videoCard" onclick="playVideo()">
+
+                <div class="cardImg">
+
+                    <img src="assets/img/Designer (2).png" alt="">
+
+                    <div class="save">
+
+                        <label class="ui-bookmark">
+                            <input type="checkbox">
+                            <div class="bookmark">
+                            <svg viewBox="0 0 32 32">
+                                <g>
+                                <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
+                                </g>
+                            </svg>
+                            </div>
+                        </label>
+                    </div>
+                    
+                </div>
+                <div class="cardDetails">
+                    <h1>Video title</h1>
+                    <span>2024/05/07</span>
+                    <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. A laudantium.
+                    </p>
+                </div>
+
+            </div>
+            <div class="videoCard" onclick="playVideo()">
+
+                <div class="cardImg">
+
+                    <img src="assets/img/Designer (3).png" alt="">
+
+                    <div class="save">
+
+                        <label class="ui-bookmark">
+                            <input type="checkbox">
+                            <div class="bookmark">
+                            <svg viewBox="0 0 32 32">
+                                <g>
+                                <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
+                                </g>
+                            </svg>
+                            </div>
+                        </label>
+                    </div>
+                    
+                </div>
+                <div class="cardDetails">
+                    <h1>Video title</h1>
+                    <span>2024/05/07</span>
+                    <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. A laudantium.
+                    </p>
+                </div>
+
+            </div>
+            <div class="videoCard" onclick="playVideo()">
+
+                <div class="cardImg">
+
+                    <img src="assets/img/Designer (4).png" alt="">
+
+                    <div class="save">
+
+                        <label class="ui-bookmark">
+                            <input type="checkbox">
+                            <div class="bookmark">
+                            <svg viewBox="0 0 32 32">
+                                <g>
+                                <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
+                                </g>
+                            </svg>
+                            </div>
+                        </label>
+                    </div>
+                    
+                </div>
+                <div class="cardDetails">
+                    <h1>Video title</h1>
+                    <span>2024/05/07</span>
+                    <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. A laudantium.
+                    </p>
+                </div>
+
+            </div>
+            <div class="videoCard" onclick="playVideo()">
+
+                <div class="cardImg">
+
+                    <img src="assets/img/Designer (5).png" alt="">
+
+                    <div class="save">
+
+                        <label class="ui-bookmark">
+                            <input type="checkbox">
+                            <div class="bookmark">
+                            <svg viewBox="0 0 32 32">
+                                <g>
+                                <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
+                                </g>
+                            </svg>
+                            </div>
+                        </label>
+                    </div>
+                    
+                </div>
+                <div class="cardDetails">
+                    <h1>Video title</h1>
+                    <span>2024/05/07</span>
+                    <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. A laudantium.
+                    </p>
+                </div>
+            </div>
+            <div class="videoCard" onclick="playVideo()">
+
+                <div class="cardImg">
+
+                    <img src="assets/img/Designer (1).png" alt="">
+
+                    <div class="save">
+
+                        <label class="ui-bookmark">
+                            <input type="checkbox">
+                            <div class="bookmark">
+                            <svg viewBox="0 0 32 32">
+                                <g>
+                                <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
+                                </g>
+                            </svg>
+                            </div>
+                        </label>
+                    </div>
+                    
+                </div>
+                <div class="cardDetails">
+                    <h1>Video title</h1>
+                    <span>2024/05/07</span>
+                    <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. A laudantium.
+                    </p>
+                </div>
+
+            </div>
+            <div class="videoCard" onclick="playVideo()">
+
+                <div class="cardImg">
+
+                    <img src="assets/img/Designer (2).png" alt="">
+
+                    <div class="save">
+
+                        <label class="ui-bookmark">
+                            <input type="checkbox">
+                            <div class="bookmark">
+                            <svg viewBox="0 0 32 32">
+                                <g>
+                                <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
+                                </g>
+                            </svg>
+                            </div>
+                        </label>
+                    </div>
+                    
+                </div>
+                <div class="cardDetails">
+                    <h1>Video title</h1>
+                    <span>2024/05/07</span>
+                    <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. A laudantium.
+                    </p>
+                </div>
+
+            </div>
+            <div class="videoCard" onclick="playVideo()">
+
+                <div class="cardImg">
+
+                    <img src="assets/img/Designer (3).png" alt="">
+
+                    <div class="save">
+
+                        <label class="ui-bookmark">
+                            <input type="checkbox">
+                            <div class="bookmark">
+                            <svg viewBox="0 0 32 32">
+                                <g>
+                                <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
+                                </g>
+                            </svg>
+                            </div>
+                        </label>
+                    </div>
+                    
+                </div>
+                <div class="cardDetails">
+                    <h1>Video title</h1>
+                    <span>2024/05/07</span>
+                    <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. A laudantium.
+                    </p>
+                </div>
+
+            </div>
+            <div class="videoCard" onclick="playVideo()">
+
+                <div class="cardImg">
+
+                    <img src="assets/img/Designer (4).png" alt="">
+
+                    <div class="save">
+
+                        <label class="ui-bookmark">
+                            <input type="checkbox">
+                            <div class="bookmark">
+                            <svg viewBox="0 0 32 32">
+                                <g>
+                                <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
+                                </g>
+                            </svg>
+                            </div>
+                        </label>
+                    </div>
+                    
+                </div>
+                <div class="cardDetails">
+                    <h1>Video title</h1>
+                    <span>2024/05/07</span>
+                    <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. A laudantium.
+                    </p>
+                </div>
+
+            </div>
+            <div class="videoCard" onclick="playVideo()">
+
+                <div class="cardImg">
+
+                    <img src="assets/img/Designer (5).png" alt="">
+
+                    <div class="save">
+
+                        <label class="ui-bookmark">
+                            <input type="checkbox">
+                            <div class="bookmark">
+                            <svg viewBox="0 0 32 32">
+                                <g>
+                                <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
+                                </g>
+                            </svg>
+                            </div>
+                        </label>
+                    </div>
+                    
+                </div>
+                <div class="cardDetails">
+                    <h1>Video title</h1>
+                    <span>2024/05/07</span>
+                    <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. A laudantium.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="videoScreen" class="w-full fixed left-0 bottom-20 lg:bottom-0 z-30 overflow-y-scroll">
+            <div class="w-full h-full relative p-3">
+
+                <div class="absolute z-40 closeBtn top-5 rounded-2xl cursor-pointer p-3 right-5 shadowDes" onclick="playVideo()">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
+                    </svg>
+                </div>
+                <div id="videoScreenContainer" class="w-full flex flex-col lg:flex-row">
+
+                    <div class="w-full lg:w-2/3 rounded-3xl p-2" id="videoCoverDiv">
+                        <video src="assets/video/Aramo.mp4" controls loop class="w-full h-full rounded-2xl"></video>
+                        <div id="videoControlBtn" class=" mt-2 rounded-2xl">
+
+                            <ul class="flex flex-col-reverse md:flex-row justify-between">
+                                <li>
+                                    <ul class="flex items-center justify-between gap-2">
+                                        <li>
+                                            <div id="ChanelLogo" class="w-10 h-10 overflow-hidden border border-slate-600 rounded-2xl">
+                                                <img src="assets/img/20230408_210852.jpg" class="w-10 h-10 rounded-2xl" alt="">
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="w-36 flex-1">
+                                                <h1>
+                                                    Arash Mohammadi
+                                                </h1>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <button class="shadowDes px-4 py-2 rounded-lg cursor-pointer">
+                                                Subscribe
+                                            </button>
+                                        </li>
+                                        <li class="shadowDes p-2 w-10 h-10 rounded-xl cursor-pointer">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" />
+                                            </svg>                                                                                        
+                                        </li>
+                                    </ul>
+                                </li>
+                                <hr class="md:hidden my-1">
+                                <li>
+                                    <ul class="flex flex-row-reverse justify-between gap-5">
+                                        <li class="shadowDes p-2 w-10 h-10 rounded-xl cursor-pointer">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
+                                            </svg>                                              
+                                        </li>
+                                        <li>
+                                            <ul class="flex gap-1 h-10">
+                                                <li class="shadowDes p-2 w-10 h-10 rounded-xl cursor-pointer">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.25c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 0 1 2.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 0 0 .322-1.672V2.75a.75.75 0 0 1 .75-.75 2.25 2.25 0 0 1 2.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282m0 0h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 0 1-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 0 0-1.423-.23H5.904m10.598-9.75H14.25M5.904 18.5c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 0 1-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 9.953 4.167 9.5 5 9.5h1.053c.472 0 .745.556.5.96a8.958 8.958 0 0 0-1.302 4.665c0 1.194.232 2.333.654 3.375Z" />
+                                                    </svg>
+                                                </li>
+                                                <li class="shadowDes p-2 w-10 h-10 rounded-xl cursor-pointer">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M7.498 15.25H4.372c-1.026 0-1.945-.694-2.054-1.715a12.137 12.137 0 0 1-.068-1.285c0-2.848.992-5.464 2.649-7.521C5.287 4.247 5.886 4 6.504 4h4.016a4.5 4.5 0 0 1 1.423.23l3.114 1.04a4.5 4.5 0 0 0 1.423.23h1.294M7.498 15.25c.618 0 .991.724.725 1.282A7.471 7.471 0 0 0 7.5 19.75 2.25 2.25 0 0 0 9.75 22a.75.75 0 0 0 .75-.75v-.633c0-.573.11-1.14.322-1.672.304-.76.93-1.33 1.653-1.715a9.04 9.04 0 0 0 2.86-2.4c.498-.634 1.226-1.08 2.032-1.08h.384m-10.253 1.5H9.7m8.075-9.75c.01.05.027.1.05.148.593 1.2.925 2.55.925 3.977 0 1.487-.36 2.89-.999 4.125m.023-8.25c-.076-.365.183-.75.575-.75h.908c.889 0 1.713.518 1.972 1.368.339 1.11.521 2.287.521 3.507 0 1.553-.295 3.036-.831 4.398-.306.774-1.086 1.227-1.918 1.227h-1.053c-.472 0-.745-.556-.5-.96a8.95 8.95 0 0 0 .303-.54" />
+                                                    </svg>                                                      
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="shadowDes p-2 w-10 h-10 rounded-xl cursor-pointer">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
+                                            </svg>                                              
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="flex flex-wrap gap-3 mt-5">
+                    <div class="videoCard" onclick="playVideo()">
+        
+                        <div class="cardImg">
+        
+                            <img src="assets/img/Designer (1).png" alt="">
+        
+                            <div class="save">
+        
+                                <label class="ui-bookmark">
+                                    <input type="checkbox">
+                                    <div class="bookmark">
+                                    <svg viewBox="0 0 32 32">
+                                        <g>
+                                        <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
+                                        </g>
+                                    </svg>
+                                    </div>
+                                </label>
+                                                                       
+                            </div>
+                            
+                        </div>
+                        <div class="cardDetails">
+                            <h1>Video title</h1>
+                            <span>2024/05/07</span>
+                            <p>
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. A laudantium.
+                            </p>
+                        </div>
+        
+                    </div>
+                    <div class="videoCard" onclick="playVideo()">
+        
+                        <div class="cardImg">
+        
+                            <img src="assets/img/Designer (2).png" alt="">
+        
+                            <div class="save">
+        
+                                <label class="ui-bookmark">
+                                    <input type="checkbox">
+                                    <div class="bookmark">
+                                    <svg viewBox="0 0 32 32">
+                                        <g>
+                                        <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
+                                        </g>
+                                    </svg>
+                                    </div>
+                                </label>
+                            </div>
+                            
+                        </div>
+                        <div class="cardDetails">
+                            <h1>Video title</h1>
+                            <span>2024/05/07</span>
+                            <p>
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. A laudantium.
+                            </p>
+                        </div>
+        
+                    </div>
+                    <div class="videoCard"  onclick="playVideo()">
+        
+                        <div class="cardImg">
+        
+                            <img src="assets/img/Designer (3).png" alt="">
+        
+                            <div class="save">
+        
+                                <label class="ui-bookmark">
+                                    <input type="checkbox">
+                                    <div class="bookmark">
+                                    <svg viewBox="0 0 32 32">
+                                        <g>
+                                        <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
+                                        </g>
+                                    </svg>
+                                    </div>
+                                </label>
+                            </div>
+                            
+                        </div>
+                        <div class="cardDetails">
+                            <h1>Video title</h1>
+                            <span>2024/05/07</span>
+                            <p>
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. A laudantium.
+                            </p>
+                        </div>
+        
+                    </div>
+                    <div class="videoCard" onclick="playVideo()">
+        
+                        <div class="cardImg">
+        
+                            <img src="assets/img/Designer (4).png" alt="">
+        
+                            <div class="save">
+        
+                                <label class="ui-bookmark">
+                                    <input type="checkbox">
+                                    <div class="bookmark">
+                                    <svg viewBox="0 0 32 32">
+                                        <g>
+                                        <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
+                                        </g>
+                                    </svg>
+                                    </div>
+                                </label>
+                            </div>
+                            
+                        </div>
+                        <div class="cardDetails">
+                            <h1>Video title</h1>
+                            <span>2024/05/07</span>
+                            <p>
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. A laudantium.
+                            </p>
+                        </div>
+        
+                    </div>
+                    <div class="videoCard" onclick="playVideo()">
+        
+                        <div class="cardImg">
+        
+                            <img src="assets/img/Designer (5).png" alt="">
+        
+                            <div class="save">
+        
+                                <label class="ui-bookmark">
+                                    <input type="checkbox">
+                                    <div class="bookmark">
+                                    <svg viewBox="0 0 32 32">
+                                        <g>
+                                        <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
+                                        </g>
+                                    </svg>
+                                    </div>
+                                </label>
+                            </div>
+                            
+                        </div>
+                        <div class="cardDetails">
+                            <h1>Video title</h1>
+                            <span>2024/05/07</span>
+                            <p>
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. A laudantium.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="videoCard" onclick="playVideo()">
+        
+                        <div class="cardImg">
+        
+                            <img src="assets/img/Designer (1).png" alt="">
+        
+                            <div class="save">
+        
+                                <label class="ui-bookmark">
+                                    <input type="checkbox">
+                                    <div class="bookmark">
+                                    <svg viewBox="0 0 32 32">
+                                        <g>
+                                        <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
+                                        </g>
+                                    </svg>
+                                    </div>
+                                </label>
+                            </div>
+                            
+                        </div>
+                        <div class="cardDetails">
+                            <h1>Video title</h1>
+                            <span>2024/05/07</span>
+                            <p>
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. A laudantium.
+                            </p>
+                        </div>
+        
+                    </div>
+                    <div class="videoCard" onclick="playVideo()">
+        
+                        <div class="cardImg">
+        
+                            <img src="assets/img/Designer (2).png" alt="">
+        
+                            <div class="save">
+        
+                                <label class="ui-bookmark">
+                                    <input type="checkbox">
+                                    <div class="bookmark">
+                                    <svg viewBox="0 0 32 32">
+                                        <g>
+                                        <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
+                                        </g>
+                                    </svg>
+                                    </div>
+                                </label>
+                            </div>
+                            
+                        </div>
+                        <div class="cardDetails">
+                            <h1>Video title</h1>
+                            <span>2024/05/07</span>
+                            <p>
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. A laudantium.
+                            </p>
+                        </div>
+        
+                    </div>
+                    <div class="videoCard" onclick="playVideo()">
+        
+                        <div class="cardImg">
+        
+                            <img src="assets/img/Designer (3).png" alt="">
+        
+                            <div class="save">
+        
+                                <label class="ui-bookmark">
+                                    <input type="checkbox">
+                                    <div class="bookmark">
+                                    <svg viewBox="0 0 32 32">
+                                        <g>
+                                        <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
+                                        </g>
+                                    </svg>
+                                    </div>
+                                </label>
+                            </div>
+                            
+                        </div>
+                        <div class="cardDetails">
+                            <h1>Video title</h1>
+                            <span>2024/05/07</span>
+                            <p>
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. A laudantium.
+                            </p>
+                        </div>
+        
+                    </div>
+                    <div class="videoCard" onclick="playVideo()">
+        
+                        <div class="cardImg">
+        
+                            <img src="assets/img/Designer (4).png" alt="">
+        
+                            <div class="save">
+        
+                                <label class="ui-bookmark">
+                                    <input type="checkbox">
+                                    <div class="bookmark">
+                                    <svg viewBox="0 0 32 32">
+                                        <g>
+                                        <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
+                                        </g>
+                                    </svg>
+                                    </div>
+                                </label>
+                            </div>
+                            
+                        </div>
+                        <div class="cardDetails">
+                            <h1>Video title</h1>
+                            <span>2024/05/07</span>
+                            <p>
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. A laudantium.
+                            </p>
+                        </div>
+        
+                    </div>
+                    <div class="videoCard" onclick="playVideo()">
+        
+                        <div class="cardImg">
+        
+                            <img src="assets/img/Designer (5).png" alt="">
+        
+                            <div class="save">
+        
+                                <label class="ui-bookmark">
+                                    <input type="checkbox">
+                                    <div class="bookmark">
+                                    <svg viewBox="0 0 32 32">
+                                        <g>
+                                        <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
+                                        </g>
+                                    </svg>
+                                    </div>
+                                </label>
+                            </div>
+                            
+                        </div>
+                        <div class="cardDetails">
+                            <h1>Video title</h1>
+                            <span>2024/05/07</span>
+                            <p>
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. A laudantium.
+                            </p>
+                        </div>
+                    </div>
+        
+                </div>
+        
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+</body>
+</html>
